@@ -99,6 +99,7 @@ Fitur unik dari proyek ini adalah keharusan bagi pengguna untuk mengunggah foto 
 
 ## 📂 Struktur Proyek
 
+'''py
 .
 ├── app
 │   ├── controllers     # Logika bisnis (Auth, Dashboard)
@@ -116,3 +117,4 @@ Fitur unik dari proyek ini adalah keharusan bagi pengguna untuk mengunggah foto 
 │   ├── .htaccess       # Pengaturan URL rewriting (untuk Apache)
 │   └── index.php       # Entry point/Front controller
 └── .htaccess           # Pengaturan root (jika diperlukan)
+'''
