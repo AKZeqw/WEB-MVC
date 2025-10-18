@@ -23,6 +23,12 @@
     </nav>
 
     <div class="container py-5">
+
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Selamat Datang, <?= htmlspecialchars($_SESSION['nama_lengkap']); ?>!</h4>
+            <p>Anda telah berhasil login ke dashboard.</p>
+        </div>
+        
         <h2 class="mb-4">Data Akun Terdaftar</h2>
 
         <div class="table-responsive">
