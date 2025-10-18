@@ -92,30 +92,49 @@ class DashboardController extends Controller {
         $foto_profil_file = $user['foto_profil'];
         $tanda_tangan_file = $user['tanda_tangan'];
         
-        //3. Hapus data user dari database
+        //3. Cek apakah ID yang akan dihapus sama dengan ID di session
+        //(Ini adalah user yang sedang menghapus akunnya sendiri)
+        $isDeletingSelf = ($id == $_SESSION['user_id']);
+
+        //4. Hapus data user dari database
         if($userModel->deleteUser($id)) {
             
-            //4. Tentukan path file
-            //Path ini relatif terhadap folder 'public' tempat index.php dijalankan
+            //5. Tentukan path file
             $path_foto = 'uploads/fotoprofil/' . $foto_profil_file;
             $path_ttd = 'uploads/tandatangan/' . $tanda_tangan_file;
 
-            //5. Hapus file foto profil jika ada
+            //6. Hapus file foto profil jika ada
             if(file_exists($path_foto) && !empty($foto_profil_file)) {
                 unlink($path_foto);
             }
 
-            //6. Hapus file tanda tangan jika ada
+            //7. Hapus file tanda tangan jika ada
             if(file_exists($path_ttd) && !empty($tanda_tangan_file)) {
                 unlink($path_ttd);
             }
 
-            $_SESSION['success'] = 'User berhasil dihapus beserta filenya!';
+            //8. Logika baru: Cek apakah user menghapus dirinya sendiri
+            if($isDeletingSelf) {
+                //Hancurkan session lama
+                session_unset();
+                session_destroy();
+                
+                //Mulai session baru hanya untuk menyimpan pesan sukses (flash message)
+                session_start();
+                $_SESSION['success'] = 'Akun Anda telah berhasil dihapus.';
+                
+                //Redirect ke halaman login
+                $this->redirect('auth/login');
+            } else {
+                //Jika menghapus user lain (seperti admin)
+                $_SESSION['success'] = 'User berhasil dihapus beserta filenya!';
+                $this->redirect('dashboard/index');
+            }
+
         } else {
             $_SESSION['error'] = 'Gagal menghapus user!';
+            $this->redirect('dashboard/index');
         }
-        
-        $this->redirect('dashboard/index');
     }
 }
 ?>
