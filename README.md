@@ -36,7 +36,7 @@ Fitur unik dari proyek ini adalah keharusan bagi pengguna untuk mengunggah foto 
 ## Prasyarat Instalasi
 
 * Web Server (XAMPP, WAMP, MAMP, atau sejenisnya)
-* PHP 7.4 atau lebih baru
+* PHP 8.3 atau lebih baru
 * Database MySQL
 * Web Browser
 
