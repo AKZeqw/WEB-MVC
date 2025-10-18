@@ -21,8 +21,8 @@ class AuthController extends Controller {
 
             // Validasi nomor telepon
             $nomor_telepon = $_POST['nomor_telepon'];
-            if(!is_numeric($nomor_telepon) || strlen($nomor_telepon) < 11 || strlen($nomor_telepon) > 20) {
-                $_SESSION['error'] = 'Nomor telepon harus angka dengan panjang 11-20 digit!';
+            if(!is_numeric($nomor_telepon) || strlen($nomor_telepon) < 10 || strlen($nomor_telepon) > 12) {
+                $_SESSION['error'] = 'Nomor telepon harus angka dengan panjang 10-12 digit!';
                 $this->redirect('auth/register');
                 return;
             }
@@ -36,7 +36,7 @@ class AuthController extends Controller {
             }
 
             // Upload foto profil
-            $foto_profil = $this->uploadFile($_FILES['foto_profil'], '../uploads/fotoprofil/');
+            $foto_profil = $this->uploadFile($_FILES['foto_profil'], 'uploads/fotoprofil/');
             if(!$foto_profil) {
                 $_SESSION['error'] = 'Gagal upload foto profil!';
                 $this->redirect('auth/register');
@@ -143,7 +143,7 @@ class AuthController extends Controller {
         $data = base64_decode($image);
         
         $fileName = time() . '_signature.png';
-        $filePath = '../uploads/tandatangan/' . $fileName;
+        $filePath = 'uploads/tandatangan/' . $fileName;
         
         if(file_put_contents($filePath, $data)) {
             return $fileName;

@@ -15,7 +15,7 @@
                 <a class="nav-link" href="<?= BASEURL; ?>dashboard/profile">
                     <i class="bi bi-person-circle"></i> Profil
                 </a>
-                <a class="nav-link" href="<?= BASEURL; ?>auth/logout">
+                <a class="nav-link" href="#" onclick="confirmLogout()">
                     <i class="bi bi-box-arrow-right"></i> Logout
                 </a>
             </div>
@@ -24,20 +24,6 @@
 
     <div class="container py-5">
         <h2 class="mb-4">Data Akun Terdaftar</h2>
-
-        <?php if(isset($_SESSION['success'])): ?>
-            <div class="alert alert-success alert-dismissible fade show">
-                <?= $_SESSION['success']; unset($_SESSION['success']); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        <?php endif; ?>
-
-        <?php if(isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger alert-dismissible fade show">
-                <?= $_SESSION['error']; unset($_SESSION['error']); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        <?php endif; ?>
 
         <div class="table-responsive">
             <table class="table table-striped table-hover">
@@ -65,23 +51,22 @@
                             <td><?= htmlspecialchars($user['provinsi']); ?></td>
                             <td><?= htmlspecialchars($user['kota']); ?></td>
                             <td>
-                                <img src="<?= BASEURL; ?>../uploads/fotoprofil/<?= $user['foto_profil']; ?>" 
-                                     alt="Foto" width="50" height="50" class="rounded">
+                                <img src="<?= BASEURL; ?>uploads/fotoprofil/<?= $user['foto_profil']; ?>" 
+                                    alt="Foto" width="50" height="50" class="rounded" style="object-fit: cover;">
                             </td>
                             <td>
-                                <img src="<?= BASEURL; ?>../uploads/tandatangan/<?= $user['tanda_tangan']; ?>" 
-                                     alt="Tanda Tangan" width="100" class="border">
+                                <img src="<?= BASEURL; ?>uploads/tandatangan/<?= $user['tanda_tangan']; ?>" 
+                                    alt="Tanda Tangan" width="100" class="border">
                             </td>
                             <td>
                                 <button class="btn btn-sm btn-warning" data-bs-toggle="modal" 
                                         data-bs-target="#editModal<?= $user['id']; ?>">
                                     <i class="bi bi-pencil"></i> Edit
                                 </button>
-                                <a href="<?= BASEURL; ?>dashboard/delete/<?= $user['id']; ?>" 
-                                   class="btn btn-sm btn-danger" 
-                                   onclick="return confirm('Yakin ingin menghapus akun ini?')">
+                                <button class="btn btn-sm btn-danger" 
+                                        onclick="confirmDelete(<?= $user['id']; ?>, '<?= htmlspecialchars($user['nama_lengkap']); ?>')">
                                     <i class="bi bi-trash"></i> Hapus
-                                </a>
+                                </button>
                             </td>
                         </tr>
 
@@ -150,5 +135,65 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        // SweetAlert untuk notifikasi
+        <?php if(isset($_SESSION['success'])): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '<?= $_SESSION['success']; ?>',
+                confirmButtonColor: '#198754'
+            });
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['error'])): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= $_SESSION['error']; ?>',
+                confirmButtonColor: '#dc3545'
+            });
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+
+        // Konfirmasi hapus dengan SweetAlert2
+        function confirmDelete(userId, userName) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: `Anda akan menghapus akun "${userName}"`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?= BASEURL; ?>dashboard/delete/' + userId;
+                }
+            });
+        }
+
+        // Konfirmasi logout
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Logout',
+                text: 'Apakah Anda yakin ingin keluar?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Logout',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?= BASEURL; ?>auth/logout';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

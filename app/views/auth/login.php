@@ -14,20 +14,6 @@
                     <div class="card-body p-5">
                         <h2 class="text-center mb-4">Login</h2>
                         
-                        <?php if(isset($_SESSION['error'])): ?>
-                            <div class="alert alert-danger alert-dismissible fade show">
-                                <?= $_SESSION['error']; unset($_SESSION['error']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        <?php endif; ?>
-
-                        <?php if(isset($_SESSION['success'])): ?>
-                            <div class="alert alert-success alert-dismissible fade show">
-                                <?= $_SESSION['success']; unset($_SESSION['success']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        <?php endif; ?>
-
                         <form action="<?= BASEURL; ?>auth/login" method="POST">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
@@ -51,5 +37,28 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        <?php if(isset($_SESSION['error'])): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= $_SESSION['error']; ?>',
+                confirmButtonColor: '#dc3545'
+            });
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['success'])): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '<?= $_SESSION['success']; ?>',
+                confirmButtonColor: '#198754'
+            });
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+    </script>
 </body>
 </html>

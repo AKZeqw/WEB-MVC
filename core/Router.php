@@ -1,7 +1,7 @@
 <?php
 class Router {
     protected $controller = 'AuthController';
-    protected $method = 'register';
+    protected $method = 'login';
     protected $params = [];
 
     public function __construct() {

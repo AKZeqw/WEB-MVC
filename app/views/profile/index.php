@@ -15,7 +15,7 @@
                 <a class="nav-link active" href="<?= BASEURL; ?>dashboard/profile">
                     <i class="bi bi-person-circle"></i> Profil
                 </a>
-                <a class="nav-link" href="<?= BASEURL; ?>auth/logout">
+                <a class="nav-link" href="#" onclick="confirmLogout()">
                     <i class="bi bi-box-arrow-right"></i> Logout
                 </a>
             </div>
@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-md-4 text-center">
-                                <img src="<?= BASEURL; ?>../uploads/fotoprofil/<?= $data['user']['foto_profil']; ?>" 
+                                <img src="<?= BASEURL; ?>uploads/fotoprofil/<?= $data['user']['foto_profil']; ?>" 
                                      alt="Foto Profil" class="img-fluid rounded-circle border border-3" 
                                      style="width: 200px; height: 200px; object-fit: cover;">
                             </div>
@@ -68,7 +68,7 @@
                             <div class="col-md-12">
                                 <h5><i class="bi bi-pen"></i> Tanda Tangan</h5>
                                 <div class="border rounded p-3 bg-light text-center">
-                                    <img src="<?= BASEURL; ?>../uploads/tandatangan/<?= $data['user']['tanda_tangan']; ?>" 
+                                    <img src="<?= BASEURL; ?>uploads/tandatangan/<?= $data['user']['tanda_tangan']; ?>" 
                                          alt="Tanda Tangan" class="img-fluid" style="max-height: 150px;">
                                 </div>
                             </div>
@@ -86,5 +86,25 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Logout',
+                text: 'Apakah Anda yakin ingin keluar?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Logout',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?= BASEURL; ?>auth/logout';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

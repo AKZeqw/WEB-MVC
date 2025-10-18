@@ -1,4 +1,5 @@
 <?php
+require_once '../app/controllers/AuthController.php';
 class DashboardController extends Controller {
     
     public function __construct() {
@@ -50,7 +51,7 @@ class DashboardController extends Controller {
             // Update foto profil jika ada
             if(!empty($_FILES['foto_profil']['name'])) {
                 $authController = new AuthController();
-                $foto_profil = $authController->uploadFile($_FILES['foto_profil'], '../uploads/fotoprofil/');
+                $foto_profil = $authController->uploadFile($_FILES['foto_profil'], 'uploads/fotoprofil/');
                 if($foto_profil) {
                     $data['foto_profil'] = $foto_profil;
                 }

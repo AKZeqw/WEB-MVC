@@ -2,7 +2,7 @@
     RewriteEngine On
     RewriteBase /
     
-    # Jangan rewrite file/folder yang ada
+    # Jangan rewrite jika file/folder benar-benar ada
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     
@@ -10,5 +10,4 @@
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 
-# Disable directory listing
 Options -Indexes
