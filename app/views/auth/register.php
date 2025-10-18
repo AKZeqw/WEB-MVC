@@ -118,7 +118,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
-        // SweetAlert untuk error dan success
+        //SweetAlert untuk error dan success
         <?php if(isset($_SESSION['error'])): ?>
             Swal.fire({
                 icon: 'error',
@@ -139,7 +139,7 @@
             <?php unset($_SESSION['success']); ?>
         <?php endif; ?>
 
-        // Data Provinsi dan Kota Indonesia
+        //Data Provinsi dan Kota Indonesia
         const wilayahData = {
             "Aceh": ["Banda Aceh", "Langsa", "Lhokseumawe", "Sabang", "Subulussalam", "Aceh Barat", "Aceh Barat Daya", "Aceh Besar", "Aceh Jaya", "Aceh Selatan", "Aceh Singkil", "Aceh Tamiang", "Aceh Tengah", "Aceh Tenggara", "Aceh Timur", "Aceh Utara", "Bener Meriah", "Bireuen", "Gayo Lues", "Nagan Raya", "Pidie", "Pidie Jaya", "Simeulue"],
             "Sumatera Utara": ["Medan", "Binjai", "Gunungsitoli", "Padang Sidempuan", "Pematangsiantar", "Sibolga", "Tanjungbalai", "Tebing Tinggi", "Asahan", "Batubara", "Dairi", "Deli Serdang", "Humbang Hasundutan", "Karo", "Labuhanbatu", "Labuhanbatu Selatan", "Labuhanbatu Utara", "Langkat", "Mandailing Natal", "Nias", "Nias Barat", "Nias Selatan", "Nias Utara", "Padang Lawas", "Padang Lawas Utara", "Pakpak Bharat", "Samosir", "Serdang Bedagai", "Simalungun", "Tapanuli Selatan", "Tapanuli Tengah", "Tapanuli Utara", "Toba"],
@@ -181,7 +181,7 @@
             "Papua Barat Daya": ["Sorong", "Fakfak", "Kaimana", "Maybrat", "Raja Ampat", "Sorong Selatan", "Tambrauw"]
         };
 
-        // Populate provinsi dropdown
+        //Populate provinsi dropdown
         const provinsiSelect = document.getElementById('provinsi');
         const kotaSelect = document.getElementById('kota');
 
@@ -192,7 +192,7 @@
             provinsiSelect.appendChild(option);
         });
 
-        // Chain combo: provinsi -> kota
+        //Chain combo: provinsi -> kota
         provinsiSelect.addEventListener('change', function() {
             const selectedProvinsi = this.value;
             kotaSelect.innerHTML = '<option value="">Pilih Kota</option>';
@@ -210,7 +210,7 @@
             }
         });
 
-        // Signature Pad
+        //Signature Pad
         const canvas = document.getElementById('signature-pad');
         const signaturePad = new SignaturePad(canvas, {
             backgroundColor: 'rgb(255, 255, 255)'
@@ -220,7 +220,7 @@
             signaturePad.clear();
         }
 
-        // Form validation
+        //Form validation
         const form = document.getElementById('registerForm');
         
         form.addEventListener('submit', function(event) {
@@ -229,12 +229,12 @@
             
             let isValid = true;
 
-            // Bootstrap validation
+            //Bootstrap validation
             if (!form.checkValidity()) {
                 isValid = false;
             }
 
-            // Check signature
+            //Check signature
             const signatureError = document.getElementById('signature-error');
             if (signaturePad.isEmpty()) {
                 signatureError.style.display = 'block';

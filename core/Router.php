@@ -7,7 +7,7 @@ class Router {
     public function __construct() {
         $url = $this->parseURL();
 
-        // Controller
+        //Controller
         if(isset($url[0]) && file_exists('../app/controllers/' . ucfirst($url[0]) . 'Controller.php')) {
             $this->controller = ucfirst($url[0]) . 'Controller';
             unset($url[0]);
@@ -16,7 +16,7 @@ class Router {
         require_once '../app/controllers/' . $this->controller . '.php';
         $this->controller = new $this->controller;
 
-        // Method
+        //Method
         if(isset($url[1])) {
             if(method_exists($this->controller, $url[1])) {
                 $this->method = $url[1];
@@ -24,7 +24,7 @@ class Router {
             }
         }
 
-        // Params
+        //Params
         if(!empty($url)) {
             $this->params = array_values($url);
         }

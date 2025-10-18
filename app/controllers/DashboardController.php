@@ -43,12 +43,12 @@ class DashboardController extends Controller {
                 'kota' => $_POST['kota']
             ];
 
-            // Update password jika diisi
+            //Update password jika diisi
             if(!empty($_POST['password'])) {
                 $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             }
 
-            // Update foto profil jika ada
+            //Update foto profil jika ada
             if(!empty($_FILES['foto_profil']['name'])) {
                 $authController = new AuthController();
                 $foto_profil = $authController->uploadFile($_FILES['foto_profil'], 'uploads/fotoprofil/');
@@ -57,7 +57,7 @@ class DashboardController extends Controller {
                 }
             }
 
-            // Update tanda tangan jika ada
+            //Update tanda tangan jika ada
             if(!empty($_POST['signature'])) {
                 $authController = new AuthController();
                 $tanda_tangan = $authController->saveSignature($_POST['signature']);

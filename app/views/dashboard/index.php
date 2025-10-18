@@ -138,7 +138,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
-        // SweetAlert untuk notifikasi
+        //SweetAlert untuk notifikasi
         <?php if(isset($_SESSION['success'])): ?>
             Swal.fire({
                 icon: 'success',
@@ -159,7 +159,7 @@
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
 
-        // Konfirmasi hapus dengan SweetAlert2
+        //Konfirmasi hapus dengan SweetAlert2
         function confirmDelete(userId, userName) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
@@ -177,7 +177,7 @@
             });
         }
 
-        // Konfirmasi logout
+        //Konfirmasi logout
         function confirmLogout() {
             Swal.fire({
                 title: 'Logout',
